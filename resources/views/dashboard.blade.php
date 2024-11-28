@@ -7,9 +7,15 @@
 
     <!-- Message flash -->
     @if (session('success'))
-    <div class="bg-green-500 text-white p-4 rounded-lg mt-6 mb-6 text-center m-10">
-        {{ session('success') }}
-    </div>
+        <div class="bg-green-500 text-white p-4 rounded-lg mt-6 mb-6 text-center m-10">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="bg-red-500 text-white p-4 rounded-lg mt-6 mb-6 text-center m-10">
+            {{ session('error') }}
+        </div>
     @endif
 
     <!-- Articles -->

@@ -71,7 +71,7 @@ class UserController extends Controller
     {
         // On vérifie que l'utilisateur est bien le créateur de l'article
         if ($article->user_id !== Auth::user()->id) {
-            abort(403);
+            return redirect()->route('dashboard')->with('error', "Vous n'avez pas le droit de modifier cet article !");
         }
 
         // On récupère les données du formulaire
@@ -85,6 +85,19 @@ class UserController extends Controller
 
         // On redirige l'utilisateur vers la liste des articles (avec un flash)
         
+        return redirect()->route('dashboard')->with('success', 'Article mis à jour !');
+    }
+
+    public function remove(Request $request, Article $article)
+    {
+        // On vérifie que l'utilisateur est bien le créateur de l'article
+        if ($article->user_id !== Auth::user()->id) {
+            return redirect()->route('dashboard')->with('error', "Vous n'avez pas le droit de supprimer cet article !");
+        }
+
+        $article = Article::find($article->id);
+        $article->delete();
+
         return redirect()->route('dashboard')->with('success', 'Article mis à jour !');
     }
 }
