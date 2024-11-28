@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +12,8 @@ class UserController extends Controller
 {
     public function create()
     {
-        return view('articles.create');
+        $categories = Category::all();
+        return view('articles.create', ['categories' => $categories]);
     }
 
     public function store(Request $request)
@@ -29,13 +31,14 @@ class UserController extends Controller
         $article = Article::create($data); // $Article est l'objet article nouvellement créé
 
         // Exemple pour ajouter la catégorie 1 à l'article
-        $article->categories()->sync(1);
+        // $article->categories()->sync(1);
 
         // Exemple pour ajouter des catégories à l'article
         // $article->categories()->sync([1, 2, 3]);
 
         // Exemple pour ajouter des catégories à l'article en venant du formulaire
-        // $article->categories()->sync($request->input('categories'));
+        $article->categories()->sync($request->input('categories'));
+        
 
         // On redirige l'utilisateur vers la liste des articles
         return redirect()->route('dashboard');
@@ -46,9 +49,11 @@ class UserController extends Controller
         // On récupère l'utilisateur connecté.
         $user = Auth::user();
         $articles = Article::where('user_id', $user->id)->get();
+
         // On retourne la vue.
         return view('dashboard', [
-            'articles' => $articles
+            'articles' => $articles,
+            
         ]);
     }
 }
