@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         // On récupère les données du formulaire
         $data = $request->only(['title', 'content', 'draft']);
-
+        $cat = $request->only(['categories']);
         // Créateur de l'article (auteur)
         $data['user_id'] = Auth::user()->id;
 
@@ -30,14 +30,8 @@ class UserController extends Controller
         // On crée l'article
         $article = Article::create($data); // $Article est l'objet article nouvellement créé
 
-        // Exemple pour ajouter la catégorie 1 à l'article
-        // $article->categories()->sync(1);
-
-        // Exemple pour ajouter des catégories à l'article
-        // $article->categories()->sync([1, 2, 3]);
-
         // Exemple pour ajouter des catégories à l'article en venant du formulaire
-        $article->categories()->sync($request->input('categories'));
+        $article->categories()->sync($cat['categories']);
         
 
         // On redirige l'utilisateur vers la liste des articles
