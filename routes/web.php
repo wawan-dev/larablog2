@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
@@ -24,6 +25,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/{user}', [PublicController::class, 'index'])->name('public.index');
     Route::get('/{user}/{article}', [PublicController::class, 'show'])->name('public.show');
+
+    Route::post('/comments/store', [CommentController::class, 'store'])->name('comments.store');
 });
 
 

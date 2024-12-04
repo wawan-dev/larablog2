@@ -1,5 +1,11 @@
 <x-guest-layout>
 
+    @if (session('success'))
+        <div class="bg-green-500 text-white p-4 rounded-lg mt-6 mb-6 text-center m-10">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="text-white p-5 ">
        <a href="{{ route('public.index', $article->user->id) }}"> <- Retour aux articles </a>
     </div>
@@ -19,4 +25,19 @@
             <p class="text-gray-700 dark:text-gray-300">{{ $article->content }}</p>
         </div>
     </div>
+
+        
+    
+
+    @auth
+        <form action="{{ route('comments.store') }}" method="post" class="mt-6">
+            @csrf
+            <input type="hidden" name="articleId" value="{{ $article->id }}">
+            <textarea name="content"  placeholder="Votre commentaire"></textarea>
+            <button type="submit" class="text-white p-5">Envoyer</button>
+            
+        </form>
+    @endauth
+
+
 </x-guest-layout>
