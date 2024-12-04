@@ -19,4 +19,7 @@
         <hr>
         @endforeach
     </div>
+    <div class=" mt-6 flex justify-center p-5">
+        {{$articles->links()}}
+    </div>
 </x-guest-layout>

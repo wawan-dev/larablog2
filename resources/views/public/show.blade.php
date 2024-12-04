@@ -1,12 +1,17 @@
 <x-guest-layout>
-    <div class="text-center">
+
+    <div class="text-white p-5 ">
+       <a href="{{ route('public.index', $article->user->id) }}"> <- Retour aux articles </a>
+    </div>
+
+    <div >
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ $article->title }}
         </h2>
     </div>
 
     <div class="text-gray-500 text-sm">
-        Publié le {{ $article->created_at->format('d/m/Y') }} par <a href="{{ route('public.index', $article->user->id) }}">{{ $article->user->name }}</a>
+        Publié le {{ $article->created_at->format('d/m/Y') }} par {{ $article->user->name }}
     </div>
 
     <div>
