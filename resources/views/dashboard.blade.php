@@ -25,7 +25,8 @@
                 <h2 class="text-2xl font-bold">{{ $article->title }}</h2>
                 <p class="text-gray-700">{{ substr($article->content, 0, 30) }}...</p>
                 <div class="text-right">
-                    <a href="{{ route('articles.edit', $article->id) }}" class="text-red-500 hover:text-red-700">Modifier</a>
+                    <a href="{{ route('articles.edit', $article->id) }}" class="text-blue-500 hover:text-blue-700 p-5">Modifier</a>
+                    <a href="{{ route('articles.remove', $article->id) }}" class="text-red-500 hover:text-red-700">Supprimer</a>
                 </div>
             </div>
         </div>

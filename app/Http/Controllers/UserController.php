@@ -94,10 +94,9 @@ class UserController extends Controller
         if ($article->user_id !== Auth::user()->id) {
             return redirect()->route('dashboard')->with('error', "Vous n'avez pas le droit de supprimer cet article !");
         }
-
-        $article = Article::find($article->id);
+        
         $article->delete();
 
-        return redirect()->route('dashboard')->with('success', 'Article mis à jour !');
+        return redirect()->route('dashboard')->with('success', 'Article supprimer !');
     }
 }
