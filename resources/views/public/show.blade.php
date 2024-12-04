@@ -26,18 +26,28 @@
         </div>
     </div>
 
-        
     
+    <div class="border-2 border-black rounded-lg m-4 p-4">
+        <div class="text-white"> Section commentaire </div> <br>
+        @auth
+            <form action="{{ route('comments.store') }}" method="post" class="mt-6">
+                @csrf
+                <input type="hidden" name="articleId" value="{{ $article->id }}">
+                <textarea name="content"  placeholder="Votre commentaire"></textarea>
+                <button type="submit" class="text-white p-5">Envoyer</button>
+                
+            </form>
+        @endauth
 
-    @auth
-        <form action="{{ route('comments.store') }}" method="post" class="mt-6">
-            @csrf
-            <input type="hidden" name="articleId" value="{{ $article->id }}">
-            <textarea name="content"  placeholder="Votre commentaire"></textarea>
-            <button type="submit" class="text-white p-5">Envoyer</button>
-            
-        </form>
-    @endauth
 
+        @foreach ($article->comments as $comment)
+            <div class="text-white p-5 border-4 border-black rounded-lg shadow-2xl ">
+                Commentaire de {{$article->user->name}} <br>
+                
+                {{$comment->content}}
+            </div>
+            <br>
+        @endforeach
+    </div>
 
 </x-guest-layout>
