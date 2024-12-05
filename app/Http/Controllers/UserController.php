@@ -106,4 +106,13 @@ class UserController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Article supprimer !');
     }
+
+    public function like(Request $request, Article $article)
+    {
+        
+        $article->likes +=1;
+        $article->save();
+
+        return redirect()->back();
+    }
 }

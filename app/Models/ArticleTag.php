@@ -27,12 +27,14 @@ class ArticleTag extends Model
 
 	protected $casts = [
 		'article_id' => 'int',
-		'tag_id' => 'int'
+		'tag_id' => 'int',
+		'likes' => 'int',
 	];
 
 	protected $fillable = [
 		'article_id',
-		'tag_id'
+		'tag_id',
+		'likes',
 	];
 
 	public function article()

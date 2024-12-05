@@ -17,9 +17,7 @@ class PublicController extends Controller
         return view('public.index', [
             'articles' => $articles,
             'user' => $user
-        ]);
-
-        
+        ]);       
     }
 
     public function show(User $user, Article $article)

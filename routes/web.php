@@ -6,9 +6,7 @@ use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 require __DIR__.'/auth.php';
 
@@ -27,7 +25,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/{user}', [PublicController::class, 'index'])->name('public.index');
     Route::get('/{user}/{article}', [PublicController::class, 'show'])->name('public.show');
 
+    Route::get('/articles/like/{article}', [UserController::class, 'like'])->name('article.like');
+
     Route::post('/comments/store', [CommentController::class, 'store'])->name('comments.store');
+
+    Route::get('/', [PublicController::class, 'home'])->name('public.home');
 });
 
 
