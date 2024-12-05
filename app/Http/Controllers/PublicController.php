@@ -11,10 +11,22 @@ class PublicController extends Controller
     public function index(User $user)
     {
         // On récupère les articles publiés de l'utilisateur
-        $articles = Article::where('user_id', $user->id)->where('draft', 0)->paginate(5);;
+        $articles = Article::where('user_id', $user->id)->where('draft', 0)->paginate(5);
         
         // On retourne la vue
         return view('public.index', [
+            'articles' => $articles,
+            'user' => $user
+        ]);       
+    }
+
+    public function home(User $user)
+    {
+        // On récupère les articles publiés de l'utilisateur
+        $articles = Article::where('draft', 0)->orderBy('likes', 'desc')->paginate(5);
+        
+        // On retourne la vue
+        return view('public.home', [
             'articles' => $articles,
             'user' => $user
         ]);       

@@ -6,9 +6,11 @@
         </div>
     @endif
 
+    
     <div class="text-white p-5 ">
        <a href="{{ route('public.index', $article->user->id) }}"> <- Retour aux articles </a>
     </div>
+    
 
     <div>
         @foreach ($article->categories as $category)

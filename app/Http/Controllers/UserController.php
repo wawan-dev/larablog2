@@ -18,9 +18,11 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-
-        
-        
+        $request->validate([
+            'content' => 'required|string|max:10000',
+            'title' => 'required|string|max:100',
+            'likes'=> 'int'
+        ]);   
         // On récupère les données du formulaire
         $data = $request->only(['title', 'content', 'draft']);
         $cat = $request->only(['categories']);
@@ -29,6 +31,8 @@ class UserController extends Controller
 
         // Gestion du draft
         $data['draft'] = isset($data['draft']) ? 1 : 0;
+
+        $data['likes'] = 0;
 
         // On crée l'article
         $article = Article::create($data); // $Article est l'objet article nouvellement créé
