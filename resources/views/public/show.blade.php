@@ -10,6 +10,14 @@
        <a href="{{ route('public.index', $article->user->id) }}"> <- Retour aux articles </a>
     </div>
 
+    <div>
+        @foreach ($article->categories as $category)
+            <span class="inline-block px-3 py-1 bg-gray-200 text-black rounded-full text-sm font-medium ml-5 ">
+                {{ $category->name }}
+            </span>
+        @endforeach
+    </div>
+    <br>
     <div >
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ $article->title }}
@@ -42,7 +50,7 @@
 
         @foreach ($article->comments as $comment)
             <div class="text-white p-5 border-4 border-black rounded-lg shadow-2xl ">
-                Commentaire de {{$article->user->name}} <br>
+                Commentaire de {{$article->user->name}} : <br>
                 
                 {{$comment->content}}
             </div>

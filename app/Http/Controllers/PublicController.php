@@ -12,7 +12,7 @@ class PublicController extends Controller
     {
         // On récupère les articles publiés de l'utilisateur
         $articles = Article::where('user_id', $user->id)->where('draft', 0)->paginate(5);;
-
+        
         // On retourne la vue
         return view('public.index', [
             'articles' => $articles,

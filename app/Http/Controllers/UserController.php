@@ -61,9 +61,11 @@ class UserController extends Controller
             return redirect()->route('dashboard')->with('error', "Vous n'avez pas le droit d'accéder à cet article !");
         }
 
+        $categories = Category::all();
         // On retourne la vue avec l'article
         return view('articles.edit', [
-            'article' => $article
+            'article' => $article,
+            'categories' => $categories
         ]);
     }
 
@@ -79,6 +81,11 @@ class UserController extends Controller
 
         // Gestion du draft
         $data['draft'] = isset($data['draft']) ? 1 : 0;
+
+        $cat = $request->only(['categories']);
+        if($cat != null){
+            $article->categories()->sync($cat['categories']);
+        }
 
         // On met à jour l'article
         $article->update($data);
