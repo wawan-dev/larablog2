@@ -1,3 +1,15 @@
+@auth
+    @include('layouts.navigation')
+@endauth
+
+@guest
+    @if (Route::has('login'))
+        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+            <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
+        </div>
+    @endif
+@endguest
+
 <x-guest-layout>
 
     @if (session('success'))
